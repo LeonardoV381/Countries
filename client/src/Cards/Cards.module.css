@@ -1,0 +1,12 @@
+.container{
+    
+    margin-top: 22px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: hidden;
+    padding:20px;
+    justify-content: center;
+    list-style: none;
+    align-items: center;
+    
+}

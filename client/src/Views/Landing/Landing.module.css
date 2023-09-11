@@ -1,0 +1,56 @@
+.fondo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2; 
+   }
+
+.title {
+    font-size: 95px;
+    margin-top: 250px;
+    color: azure;
+    -webkit-text-stroke: 3.2px #a51a1a;
+}
+
+.image {
+    /* margin-top: 110px; */
+    height: 300px;
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px; 
+    z-index: 9999; 
+
+    
+}
+
+.button {
+    
+    color: red;
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 30px;
+    background-color: rgb(192, 192, 177);
+    box-shadow: 8px 8px  14px rgb(13, 14, 13);
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 50px; 
+    margin: 0; 
+    
+/* 
+
+    z-index: 2; */
+
+}
+
+.button:hover {
+    background-color:  white;
+    color: #000;
+    transition: background-color 0.5s, color 1s;
+}

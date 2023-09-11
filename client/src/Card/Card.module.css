@@ -1,0 +1,49 @@
+.flag{
+    margin-top: 6px;
+    border: 5px;
+    border-radius: 10px;
+    border-style: groove;
+    height: 90px;
+    width: 150px;
+    box-shadow: 8px 8px  14px rgb(218, 177, 177);
+ 
+}
+.flag:hover{
+    box-shadow: 10px 15px  20px yellow;
+    transition: 1s;
+}
+
+.text{
+    font-size: 20px;
+    font-family: fantasy;   
+    color: aliceblue;
+    -webkit-text-stroke: 2px #a51a1a;
+}
+
+.textSmall{
+    font-size: 17px;
+    font-family: fantasy;
+    color: aliceblue;
+    -webkit-text-stroke: 2px #a81212;
+}
+
+
+.container{
+
+    margin-top: 10px;
+    margin-right: 22px;
+    height: 280px;
+    overflow: auto;
+    width: 200px;
+    border: 10px blue;
+    border-style: groove;
+    border-radius: 20px;
+    display: inline-block;
+    box-shadow: 8px 8px 8px rgb(75, 62, 194);
+    cursor: pointer;
+}
+
+.container:hover{
+    box-shadow: 15px 15px 15px gold;
+    transition: 1s;
+}

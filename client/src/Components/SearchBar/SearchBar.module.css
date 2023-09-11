@@ -1,0 +1,29 @@
+.container{
+   background-color: rgba(3, 3, 65, 0.473) ;
+   display: flex;
+   justify-content: end;
+   padding: 2px;
+   position: fixed;
+   z-index: 2;
+   
+}
+
+.container input{
+    width: 400px;
+    height: 27px;
+    padding: 5px;
+    position: fixed;
+    margin-right: 100px;
+    z-index: 4;
+    
+}
+
+.button{
+    position: fixed;
+    z-index: 4;
+}
+
+errorMessage{
+    font-size: 70px;
+    color: red;
+}
