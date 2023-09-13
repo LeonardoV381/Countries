@@ -10,6 +10,8 @@ export const SET_ACTUAL_PAGE = "SET_ACTUAL_PAGE";
 export const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
 export const CLEAR_COUNTRY_ID = "CLEAR-COUNTRY_ID";
 export const SORT_NAME_POP = "SORT_BY";
+export const FILTER_CONT_ACT = "FILTER_CONT_ACT";
+export const FILTER_NAME_POP = "FILTER_NAME_POP";
 
 
 const URL = "http://localhost:3001";
@@ -62,7 +64,7 @@ export const postActivities = (payload) => {
 
 export const getActivitiesByCountryId = (id) => {
     return async function(dispatch) {
-        console.log(id);
+
         try {
             const apiData = await axios.get(`${URL}/activities/${id}`);
             const activitiesByCountry = apiData.data;
@@ -81,6 +83,12 @@ export const getActivities = () => {
     }
 };
 
+export const setActualPage = (page) => {
+  return async function(dispatch) {
+    await dispatch({ type : SET_ACTUAL_PAGE, payload: page});
+  }
+}
+
 export const previousPage = (actualPage) => {
     return async function(dispatch){
     await dispatch({ type: SET_ACTUAL_PAGE, payload: actualPage -1 });
@@ -96,6 +104,11 @@ export const nextPage = (actualPage) => {
 export const totalPages = (element) => {
     return async function(dispatch){
         await dispatch({ type:SET_TOTAL_PAGES, payload: element });
+    }
+}
+export const filterContAct= (sortBy) =>{
+    return async function(dispatch){
+        await dispatch({ type: FILTER_CONT_ACT, payload: sortBy})
     }
 }
 

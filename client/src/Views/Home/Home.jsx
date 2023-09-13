@@ -10,6 +10,9 @@ const Home = () => {
     const dispatch = useDispatch();
     const countries = useSelector(state => state.countries);
     const activities = useSelector((state) => state.activities);
+ 
+    const activitiesId = useSelector((state) => state.activitiesCountryId);
+    console.log(activitiesId);
     const actualPage = useSelector(state => state.actualPage);
     const [ sortFor, setSortFor ] = useState("defect"); //activities, continents
     const [ sortBy, setSortBy ] = useState("defect"); //name, population
@@ -34,28 +37,27 @@ else if (sortFor === "activities") {
 
 
    
-    if (sortBy === "name" && sortDirection==="desc") {
-        filteredAndSortedCountries = filteredAndSortedCountries.sort((a, b) => {
-          return a.name.localeCompare(b.name);
-        });
+if (sortBy === "name" && sortDirection==="desc") {
+    filteredAndSortedCountries = filteredAndSortedCountries.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+    });
     }
-    else if (sortBy === "name" && sortDirection==="asc") {
-
-      filteredAndSortedCountries = filteredAndSortedCountries.sort((a, b) => {
-        return b.name.localeCompare(a.name);
-     });
-    }
+else if (sortBy === "name" && sortDirection==="asc") {
+   filteredAndSortedCountries = filteredAndSortedCountries.sort((a, b) => {
+   return b.name.localeCompare(a.name);
+   });
+}
     
-    else if (sortBy === "population" && sortDirection==="desc" ) {
-        filteredAndSortedCountries = filteredAndSortedCountries.sort((a, b) => {
-          return a.population - b.population;
-        });
-    }
-    else if (sortBy === "population" && sortDirection==="asc" ) {
-      filteredAndSortedCountries = filteredAndSortedCountries.sort((a, b) => {
-        return b.population - a.population;
-      });
-  }
+else if (sortBy === "population" && sortDirection==="desc" ) {
+    filteredAndSortedCountries = filteredAndSortedCountries.sort((a, b) => {
+     return a.population - b.population;
+    });
+ }
+else if (sortBy === "population" && sortDirection==="asc" ) {
+    filteredAndSortedCountries = filteredAndSortedCountries.sort((a, b) => {
+    return b.population - a.population;
+ });
+}
    
 
     // Aplicar la paginación
@@ -76,7 +78,7 @@ else if (sortFor === "activities") {
              dispatch(nextPage(actualPage))        
         }
     };
-
+     //calculates total pages countries displays
      const  totalDisplay = () => {
         let element = 0;
         for (let i = 0; (i * countriesDisplay)< countries.length; i++) {

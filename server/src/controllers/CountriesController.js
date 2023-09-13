@@ -19,29 +19,26 @@ const cleanArray = (arr) => {
     return clean;
 };
 
-
+//getData from 5000
 const findAllCountries = async () => { 
   const count = await checkIfCountriesIsEmpty();
   
-  const dataBaseCountriesRaw = (await axios.get('http://localhost:5000/countries')).data
-//   return [dataBaseCountriesRaw]
-
+  const dataBaseCountriesRaw = (await axios.get('http://localhost:5000/countries')).data;
+//clean unwanted items
 const dataBaseCountries = cleanArray(dataBaseCountriesRaw);
 
 if(count === true){
-await writeCountry(dataBaseCountries);
+await writeCountry(dataBaseCountries);//function for fill country table
 }
-else{
-    console.log("La tabla countries ya ha sido llenada")
-}
+
  
 return dataBaseCountries;
 
 
 };
 
-const writeCountry = async (dataBaseCountries) => { //función para llenar la tabla Countries
-   console.log("Cargando la base de datos countries...");
+const writeCountry = async (dataBaseCountries) => { //fill  Country
+   
   await dataBaseCountries.map((elem) =>{
         Country.create({
             
@@ -63,8 +60,8 @@ const writeCountry = async (dataBaseCountries) => { //función para llenar la ta
 //verify if dataBase counties is empty 
 const checkIfCountriesIsEmpty = async() =>{
     try {
-        const  count = await Country.count();
-        return count === 0; //Devuelve true si la tabla Country se encuentra vacía
+        const  count = await Country.count(); //verify if is empty
+        return count === 0; //
         
     } catch (error) {
         console.error("Error:", error.message);

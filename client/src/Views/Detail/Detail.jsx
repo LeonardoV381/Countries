@@ -1,5 +1,5 @@
 import {  useSelector, useDispatch }  from "react-redux";
-import {  useEffect, useState } from "react";
+import React, {  useEffect } from "react";
 import style from "./Detail.module.css";
 import world from "../../images/world.jpg";
 import { clearCountryId } from "../../redux/actions";
@@ -15,11 +15,11 @@ const Detail = () => {
 
   const detailCountry =  useSelector(state => state.detail);
   const detailActivities = useSelector((state) => state.activitiesCountryId);
-  const activities = useSelector((state) => state.activities);
+  const activities = useSelector((state) => state.activities); 
   let act = [];
 
     
-  //  limpia el estado de la búsqueda anterior una vez se desmonte
+  //  clean detail when unmount
     useEffect(() =>{ 
       return () => {
         dispatch(clearCountryId());
@@ -28,18 +28,22 @@ const Detail = () => {
     },[dispatch]);
 
  
-    
+    //not load id
     if(detailCountry.length === 0){
+
      
       return(
         <div className={style.background} style={{ backgroundImage: `url(${world})` }}>
-          <h1 className={style.textNull}>Busca un ID de país en mayúsculas</h1>
+          <div >
+            <h1 className={style.textNull}>Welcome to Detail</h1>
+            <h1 className={style.textNull}>Search a country with his ID on the search bar</h1>
+          </div>
         </div>
       )
     }
     else {
       
-       console.log(detailActivities);
+      
        //search id activities
        if (detailActivities ) {
           for(let i = 0; i < activities.length; i++){

@@ -11,12 +11,19 @@ const Create = () =>{
 
   const  dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
-  const [ season, setSeason ] = useState("");
-    
+  const [ season, setSeason ] = useState("Select"); 
 
-   useEffect(() => {
-   dispatch(getCountries());
-   }, [dispatch]);
+  let countriesOrder = [ ...countries];
+  
+  countriesOrder = countriesOrder.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  })
+  
+
+  useEffect(() => {
+    dispatch(getCountries());
+    }, [dispatch]);
+ 
 
 
    const [ input, setInput ] = useState({
@@ -36,9 +43,13 @@ const Create = () =>{
    countriesName: [],
   });
 
+   
+
+  
+
+
   const handleChange = (event) => {
     const { value, name } = event.target;
-    console.log(value);
     setInput({ ...input, [ name ] : value });
     setError(validate({ 
       ...input, [ name ] : value
@@ -46,19 +57,34 @@ const Create = () =>{
   }
 
 
+
+  
+  const handleSort = (event) => {
+    const { value, name } = event.target; 
+    setSeason(value)
+    setInput({...input, [ name ] : value});
+    setError(validate({
+    ...input, [ name ] : value
+    }))
+}
+         
   const handleChangeCountries = (event) => {
-      
-  const { value } = event.target;
+  const { value, name } = event.target;
   if (value){
       setInput((prevInput) => ({
       ...prevInput,
       countriesName: [...prevInput.countriesName, value],
       }));
-      setError(validate({ 
-        ...input, value
-      }))
+      
+          
   }
   };
+
+  useEffect(() => {
+    setError(validate(input));
+  },[input])
+
+
     
   const handleSubmit = async  (event) => {
      event.preventDefault();
@@ -67,26 +93,30 @@ const Create = () =>{
       
       await  axios.post("http://localhost:3001/activities", input )
       window.alert("Activity was created succesfully ");
+      setSeason("Select");
+      setInput({
+        name: "",
+        dificulty : "",
+        time:  "",
+        season: "",
+        countriesName: []
+       })
 
+       setError({
+        name: "",
+        dificulty : "",
+        time:  "",
+        season: "",
+        countriesName: []
+        })
     
     }
     else{
-       return window.alert("Please check all the fields");
+      console.log(error);
+       return window.alert("Please check all the fields", error);
     } 
-     setInput({
-     name: "",
-     dificulty : "",
-     time:  "",
-     season: "",
-     countriesName: []
-    })
-    setError({
-    name: "",
-    dificulty : "",
-    time:  "",
-    season: "",
-    countriesName: []
-    })
+     
+   
 
      } catch (error) {
       window.alert("Error for send the data, please check all the fields", error)
@@ -132,20 +162,23 @@ const Create = () =>{
           onChange={handleChange}
           placeholder="Type time in hours"
           type='number' />
-          {error.time ? <p className={style.danger}>{error.time}</p> : null}
+          {/* {error.time ? <p className={style.danger}>{error.time}</p> : null} */}
           <br />
          <div className={style.label}>    
           <label> Season: *</label>
          </div>
-          <input className={style.input}
-          name='season'
-          value={input.season.toLowerCase()}
-          onChange={handleChange}
-          placeholder="Please type a Season"
-          type='text' />
+          <label className={style.input}> 
+              Select Please season
+              <select value={ season } name="season"   onChange={ handleSort } className={style.input}>
+                 <option value="select">Select</option>  
+                 <option value="Spring">Spring</option>
+                 <option value="Summer">Summer</option>
+                 <option value="Fall">Fall</option>
+                 <option value="Winter">Winter</option>
+              </select>
           {error.season ? <p className={style.danger}>{error.season}</p> : null}
           <br />
-        
+        </label>
          <div className={style.label}>  
          <div className={style.countries}>
             {input.countriesName.map((country) => (
@@ -161,15 +194,17 @@ const Create = () =>{
            onChange={handleChangeCountries}
          >
           <option value="">Select a Country</option>
-          {countries.map((country) => (
+          {countriesOrder.map((country) => (
           <option key={country.name} value={country.name}
         
           >
           {country.name}
           </option>
+          
           ))}
           </select>
-
+          {error.countriesName ? <p className={style.danger}>{error.countriesName}</p> : null}
+         
          <br />
          <br />
          <button type= "submit">
@@ -208,16 +243,18 @@ const validate = (input) => {
     error.dificulty = "Dificulty must be a number between 1 to 5";
   }
 
-  if(input.time < 0 || input.time > 12) {
-    error.time = "Time must be between 0 to 12 hours";
-  }
+  // if(input.time < 0 || input.time > 12) {
+  //   error.time = "Time must be between 0 to 12 hours";
+  // }
+ 
+  
   if (!input.season) {
     error.season = "Please choose a season";
   }
-  if((input.season !== "summer") && (input.season !=="fall") && (input.season !== "winter") && (input.season !=="spring")){
-    error.season = "Please digit a valid season: summer, fall, winter or spring";
+  if((input.season !== "Summer") && (input.season !=="Fall") && (input.season !== "Winter") && (input.season !=="Spring")){
+    error.season = "Please select  any of four seasons";
   }
-  if(!input.countriesName.length){
+  if(input.countriesName.length === 0){
     error.countriesName = " Please select country or countries";
   }
   return(error);

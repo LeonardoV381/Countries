@@ -4,7 +4,7 @@
    border: 10px blue;
    border-style: groove;
    width: 600px;
-   height: 700px;
+   height: 740px;
    display: inline-block;
    background-color: rgba(0, 0, 0, 0.534);
    box-shadow: 8px 8px  14px rgb(201, 214, 81);
@@ -30,10 +30,10 @@
 .textNull{
   margin-top: 80px;
   color: rgb(204, 222, 245);
-  -webkit-text-stroke: 0.9px #c01a1a;
+  -webkit-text-stroke: 1.5px #c01a1a;
   font-family: fantasy;  
    font-size: 40px; 
-   background-color: rgba(255, 235, 205, 0.473);
+   /* background-color: rgba(255, 235, 205, 0.473); */
    box-shadow: 15px 14px  14px rgb(10, 10, 10);
 }
 
@@ -43,7 +43,7 @@
     -webkit-text-stroke: 0.9px #c01a1a;
     font-family: fantasy;  
      font-size: 10px; 
-     background-color: rgba(255, 235, 205, 0.473);
+     /* background-color: rgba(255, 235, 205, 0.473); */
      box-shadow: 15px 14px  14px rgb(10, 10, 10);
 }
 

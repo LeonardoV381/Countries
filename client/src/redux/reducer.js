@@ -1,4 +1,4 @@
-import { GET_COUNTRIES, GET_COUNTRY_ID, CLEAR_COUNTRY_ID ,GET_COUNTRIES_BY_NAME, POST_ACTIVITIES, GET_ACTIVITIES_BY_COUNTRY_ID, GET_ACTIVITIES, SET_ACTUAL_PAGE, SORT_NAME_POP, SET_TOTAL_PAGES } from "./actions";
+import { GET_COUNTRIES, GET_COUNTRY_ID, CLEAR_COUNTRY_ID ,GET_COUNTRIES_BY_NAME, POST_ACTIVITIES, GET_ACTIVITIES_BY_COUNTRY_ID, GET_ACTIVITIES, SET_ACTUAL_PAGE,  SET_TOTAL_PAGES, FILTER_CONT_ACT, FILTER_NAME_POP } from "./actions";
 
 const initialState = {
     countries : [],
@@ -7,8 +7,10 @@ const initialState = {
     detail : [],
     actualPage : 0,
     totalPages : 0,
-    // sortBy : [ { defect : true} , {name : false}, { population: false}, ],
-    // order : [ {defect :true}, {ascendent: false},{descendent : false} ],
+    continentsActivities : [{ default: true }, { continents: false} ,{ activities:false } ],
+    namePopulation : [{ default: true }, { name: false} ,{ population:false } ],
+    
+
     
 };
 
@@ -35,8 +37,10 @@ const rootReducer = (state= initialState, action) => {
             return { ...state, totalPages: action.payload }; 
         case  CLEAR_COUNTRY_ID:
             return { ...state, detail: action.payload};
-        case SORT_NAME_POP:
-            return { ...state, sortBy : action.payload};
+        case FILTER_CONT_ACT:
+            return { ...state, continentsActivities : action.payload };
+        case FILTER_NAME_POP:
+            return { ...state, namePopulation: action.payload };    
         default :
          return {...state};
                 

@@ -24,7 +24,7 @@ const getCountryActivitiesByCountryIdHandler = async (req, res ) => {
     const activitiesId = await getCountryActivitiesByCountryId(id);
     res.status(200).json(activitiesId);
   } catch (error) {
-    res.status(400).json({ error: error.message});
+    res.status(400).json({ error: "Cant create the new activity"});
   }
 }
 

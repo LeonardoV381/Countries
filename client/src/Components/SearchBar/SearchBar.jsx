@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getCountriesByName, getCountryId, getActivitiesByCountryId } from "../../redux/actions";
+import { getCountriesByName, getCountryId, getActivitiesByCountryId, setActualPage } from "../../redux/actions";
 import style from "./SearchBar.module.css";
 
 
@@ -9,9 +9,10 @@ export default function SearchBar() {
     const dispatch = useDispatch();
     let [ countries, setCountries ] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const page = 0;
 
     const handleChange = (event) => {
-      
+        console.log(event.target.value);
         setCountries(event.target.value);  
         setErrorMessage("");
     }
@@ -31,10 +32,12 @@ export default function SearchBar() {
         }
         else{
             if(countries.length > 0 ){
-            dispatch(getCountriesByName(countries))
+                dispatch(setActualPage(page))
+                dispatch(getCountriesByName(countries))
              .then((response) => {
                 if(response && response.error) {
                     setErrorMessage(`El país "${countries}" no se ha encontrado`);
+                    console.log(errorMessage);
                 }
                 else{
                     setErrorMessage("");
@@ -45,7 +48,8 @@ export default function SearchBar() {
              });
            
             }
-            else{
+            else if(countries.length === 0){
+                window.alert("La busqueda está vacia")
                 setErrorMessage("Please enter a valid country");
             }
         }    

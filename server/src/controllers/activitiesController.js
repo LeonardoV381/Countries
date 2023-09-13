@@ -16,7 +16,7 @@ const createActivity = async( name, dificulty, time, season, countriesName) => {
                 [ Op.or ]: [
                     {
                     name: {
-                      [ Op.iLike ]: `%${countryName.toLowerCase()}%` //búsqueda sin importar si son mayúsculas o minúsculas
+                      [ Op.iLike ]: countryName
                     }
                     },   
                 ]

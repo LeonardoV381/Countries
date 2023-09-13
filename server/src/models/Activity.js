@@ -18,13 +18,9 @@ module.exports = (sequelize) => {
         },
         time : {
             type: DataTypes.INTEGER,
-            allowNull : true,
+            // allowNull : true,
         
-        validate: {
-            isInt: true,
-            min: 1,   
-            max: 12,     
-          },
+       
         },
         season: {
             type: DataTypes.STRING,
