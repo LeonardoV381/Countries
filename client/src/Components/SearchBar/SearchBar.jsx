@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCountriesByName, getCountryId, getActivitiesByCountryId, setActualPage } from "../../redux/actions";
 import style from "./SearchBar.module.css";
@@ -12,12 +12,19 @@ export default function SearchBar() {
     const page = 0;
 
     const handleChange = (event) => {
-        console.log(event.target.value);
         setCountries(event.target.value);  
         setErrorMessage("");
     }
 
+    useEffect(() =>{
+
+    },[setCountries, countries]);
+
     const handleKeyPress = (event) => {
+        if (/^\d+$/.test(event.key)) {
+          
+            event.preventDefault();
+          }
        if(event.key === 'Enter') {
         handleSubmit(event);
        }
@@ -29,6 +36,7 @@ export default function SearchBar() {
             dispatch(getCountryId(countries));
             dispatch(getActivitiesByCountryId(countries))
             console.log("estoy en busqueda id desde search");
+            setCountries("");
         }
         else{
             if(countries.length > 0 ){
@@ -37,10 +45,13 @@ export default function SearchBar() {
              .then((response) => {
                 if(response && response.error) {
                     setErrorMessage(`El país "${countries}" no se ha encontrado`);
-                    console.log(errorMessage);
+                    window.alert("Country inserted not found")
                 }
                 else{
                     setErrorMessage("");
+                   
+                    // window.alert("Country inserted not found")
+                    // window.location.reload();
                 }
              })
              .catch((error) => {
@@ -57,7 +68,7 @@ export default function SearchBar() {
 
     return(
         <div className={style.container}>
-            <input className={style.input} type="text" placeholder="Search countrie(s)" onChange={(event) => handleChange(event) } onKeyPress={handleKeyPress} />
+            <input className={style.input} type="text" placeholder="Search countrie(s)" onChange={(event) => handleChange(event) } onKeyPress={(event) => handleKeyPress(event)} />
             <button className={style.button} type="submit"     
              onClick={(event) => handleSubmit(event) }
             >Search</button>

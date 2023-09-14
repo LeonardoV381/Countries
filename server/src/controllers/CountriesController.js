@@ -24,11 +24,12 @@ const findAllCountries = async () => {
   const count = await checkIfCountriesIsEmpty();
   
   const dataBaseCountriesRaw = (await axios.get('http://localhost:5000/countries')).data;
-//clean unwanted items
+
+  //clean unwanted items
 const dataBaseCountries = cleanArray(dataBaseCountriesRaw);
 
-if(count === true){
-await writeCountry(dataBaseCountries);//function for fill country table
+if(count === true){//if count true = dataBase empty
+await writeCountry(dataBaseCountries);//execute function for fill country table
 }
 
  
@@ -36,8 +37,8 @@ return dataBaseCountries;
 
 
 };
-
-const writeCountry = async (dataBaseCountries) => { //fill  Country
+//fill  Country
+const writeCountry = async (dataBaseCountries) => { 
    
   await dataBaseCountries.map((elem) =>{
         Country.create({

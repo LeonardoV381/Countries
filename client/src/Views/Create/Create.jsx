@@ -85,7 +85,6 @@ const Create = () =>{
   },[input])
 
 
-    
   const handleSubmit = async  (event) => {
      event.preventDefault();
      try {
@@ -207,7 +206,11 @@ const Create = () =>{
          
          <br />
          <br />
-         <button type= "submit">
+         <button type= "submit"
+                 disabled={Object.keys(error).length >0}
+                 className= {Object.keys(error).length? style.buttonError : style.button}
+                
+         >
             CREATE ACTIVITY
          </button>
         </div>

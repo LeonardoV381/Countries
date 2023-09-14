@@ -75,6 +75,12 @@ export const getActivitiesByCountryId = (id) => {
     }
 }
 
+export const activitiesCountries = () => {
+    return async function(dispatch){
+        
+    }
+}
+
 export const getActivities = () => {
     return async function(dispatch) {
         const apiData = await axios.get(`${URL}/activities`);
@@ -105,12 +111,38 @@ export const totalPages = (element) => {
     return async function(dispatch){
         await dispatch({ type:SET_TOTAL_PAGES, payload: element });
     }
-}
-export const filterContAct= (sortBy) =>{
+};
+
+export const filterContAct= (sortA) =>{
     return async function(dispatch){
-        await dispatch({ type: FILTER_CONT_ACT, payload: sortBy})
+    if(sortA==="default"){
+         await dispatch({ type: FILTER_CONT_ACT, payload: "default"})
     }
-}
+    else if(sortA==="continents"){
+        await dispatch({ type: FILTER_CONT_ACT, payload: "continents"})
+    }
+    else if(sortA==="activities"){
+        await dispatch({ type: FILTER_CONT_ACT, payload: "activities"})
+    }   
+    }
+};
+
+
+
+export const filterNamePop = (sortB) =>{
+    return async function(dispatch){
+    if(sortB=== "default"){    
+        await dispatch({ type: FILTER_NAME_POP, payload: "default"})
+    }
+    else if(sortB==="name"){
+        await dispatch({ type: FILTER_NAME_POP, payload: "name"})
+    }
+    else if(sortB==="population"){
+        await dispatch({ type: FILTER_NAME_POP, payload: "population"})
+    }   
+    }
+};
+
 
 
 

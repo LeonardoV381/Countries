@@ -7,8 +7,8 @@ const initialState = {
     detail : [],
     actualPage : 0,
     totalPages : 0,
-    continentsActivities : [{ default: true }, { continents: false} ,{ activities:false } ],
-    namePopulation : [{ default: true }, { name: false} ,{ population:false } ],
+    continentsActivities : "default",
+    namePopulation : "default",
     
 
     

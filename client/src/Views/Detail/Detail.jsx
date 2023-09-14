@@ -4,6 +4,7 @@ import style from "./Detail.module.css";
 import world from "../../images/world.jpg";
 import { clearCountryId } from "../../redux/actions";
 import activit from "../../images/activit.gif"
+import search from "../../images/search.gif";
 
 
 
@@ -37,6 +38,7 @@ const Detail = () => {
           <div >
             <h1 className={style.textNull}>Welcome to Detail</h1>
             <h1 className={style.textNull}>Search a country with his ID on the search bar</h1>
+            <img className={style.image} src={search} alt="gif search" />
           </div>
         </div>
       )

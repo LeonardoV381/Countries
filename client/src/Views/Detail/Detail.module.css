@@ -28,7 +28,7 @@
 }
 
 .textNull{
-  margin-top: 80px;
+  margin-top: 150px;
   color: rgb(204, 222, 245);
   -webkit-text-stroke: 1.5px #c01a1a;
   font-family: fantasy;  
@@ -62,4 +62,8 @@
 }
 .textId{
   font-size: 20px;
+}
+.image{
+  margin-top: 80px;
+  height: 300px;
 }

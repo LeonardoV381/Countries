@@ -2,7 +2,8 @@ const { findAllCountries, searchCountriesByName } = require("../controllers/Coun
 
 
 
-const getCountriesHandler = async ( req, res ) => {  //llama todos los países, al momento de llamar países si la tabla countries está vacía, es llenada
+const getCountriesHandler = async ( req, res ) => { 
+  // search countries includes in country or search all the countries
   const country = req.query.name;
   try {
     const results =  country ? await searchCountriesByName(country) : await findAllCountries();

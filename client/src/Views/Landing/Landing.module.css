@@ -17,9 +17,8 @@
 }
 
 .image {
-    /* margin-top: 110px; */
+  
     height: 300px;
-
     position: fixed;
     bottom: 0;
     right: 0;
@@ -42,10 +41,6 @@
     align-items: center; 
     height: 50px; 
     margin: 0; 
-    
-/* 
-
-    z-index: 2; */
 
 }
 

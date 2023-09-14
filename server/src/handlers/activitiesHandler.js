@@ -1,12 +1,13 @@
 const {
     createActivity, 
     getActivities,
-    getCountryActivitiesByCountryId
+    getCountryActivitiesByCountryId,
+    
 } = require("../controllers/activitiesController")
 
 
 
- //crear una actividad nueva por body
+ //create an activity via body
 const createActivityHandler = async ( req, res ) => {
   try {
     const {  name, dificulty, time, season, countriesName }  = req.body;
@@ -17,19 +18,30 @@ const createActivityHandler = async ( req, res ) => {
   }
 };
 
-
+//handler for get activities by country id
 const getCountryActivitiesByCountryIdHandler = async (req, res ) => {
   const { id } = req.params;
   try {
     const activitiesId = await getCountryActivitiesByCountryId(id);
     res.status(200).json(activitiesId);
   } catch (error) {
-    res.status(400).json({ error: "Cant create the new activity"});
+    res.status(400).json({ error: error.message});
   }
 }
 
 
-//consultar las actividades creadas en un arreglo de objetos en donde cada objeto es una actividad turística
+const getCountryActivityHandler = async (req, res) => { ///-CountryActivity
+  try {
+    const co = await countryActivities();
+    res.status(200).json(co);
+  } catch (error) {
+    res.status(400).json({error : error.message});
+    
+  }
+}
+
+
+//get all the activities handler
 const getActivitiesHandler = async ( req, res ) => { 
     try {
         const activities = await getActivities();
@@ -47,5 +59,6 @@ const getActivitiesHandler = async ( req, res ) => {
 module.exports = {
     createActivityHandler,
     getCountryActivitiesByCountryIdHandler,
+    getCountryActivityHandler,
     getActivitiesHandler
 }

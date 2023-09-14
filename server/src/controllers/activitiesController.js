@@ -8,6 +8,7 @@ const { Op } = require('sequelize');
 const createActivity = async( name, dificulty, time, season, countriesName) => {
     const newActivity =  await Activity.create({ name, dificulty, time, season });
   
+    //asociation to countries ID
     const countriesId = [];
 
     for(const countryName of countriesName){
@@ -22,24 +23,29 @@ const createActivity = async( name, dificulty, time, season, countriesName) => {
                 ]
             },
         });
+        //if find country in data Base push ID country finded
         if( country ){
             countriesId.push(country.id);
         }
     }
-
+    //add countries Id for relation with activity
     await newActivity.addCountries(countriesId);
     return newActivity;
 };
 
-
+//find activities by country id
 const getCountryActivitiesByCountryId = async (id) => {
+    // const act = await CountryActivity.findAll();
+    console.log("que haces aqui");
     const countryActivities = await CountryActivity.findAll({
         where: {
           CountryId : id
         },
     });
     return countryActivities;
-}
+};
+
+
 
 
 //get array of objects activities
